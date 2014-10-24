@@ -24,7 +24,6 @@ with open(sys.argv[1], 'r') as input_file:   # to automagically close the file
 data = ''.join(data.split()) # the split/join trick to remove all whitespace
 data = data.upper()          # convert to uppercase to simplify counting  
 
-for c in ['A','C','G','T']:
+for c in ['A','C','G']:
     print(data.count(c), end=" ")   # separate by spaces, no newlines
-
-print()                             # finish with a newline
+print(data.count('T'))              # finish with a newline
