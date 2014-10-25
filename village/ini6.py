@@ -32,7 +32,7 @@ import sys
 from collections import Counter
 
 with open(sys.argv[1], 'r') as in_file:   # to automagically close the file
-  words = in_file.read().split()    # make a list of all words
+  words = in_file.read().split()          # make a list of all words
 
 c = Counter(words) # using high power magic, when available :)
 
