@@ -37,4 +37,4 @@ reverse_original = dna[::-1]  # the extended slice string reversing trick
 complement_table = str.maketrans("ATCGatcg","TAGCtagc")
 reverse_complement = reverse_original.translate(complement_table)
 
-print(reverse_complement),
+print(reverse_complement)
