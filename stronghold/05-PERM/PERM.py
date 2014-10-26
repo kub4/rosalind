@@ -39,8 +39,6 @@ number_of_permutations = math.factorial(n)
 print(number_of_permutations)
 
 for p in itertools.permutations(range(1,n+1)):
-  i = 0
-  for r in p:
-    i += 1
-    if i < n: print(r, end=" ")
-    else: print(r)
+  print(" ".join(map(str, p)))
+# map applies the function to every item of iterable and returns a list of the results
+# we need strings for joining :)
