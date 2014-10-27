@@ -47,4 +47,4 @@ print(number_of_permutations)
 
 for p in itertools.permutations(range(1,n+1)):
   for signs in itertools.product((-1,1),repeat=n):
-    print([p*sign for p, sign in zip(p,signs)])
+    print(' '.join(map(str,(p*sign for p, sign in zip(p,signs)))))
