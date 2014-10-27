@@ -43,7 +43,7 @@ MAMAPRTEINSTRING
 import sys
 
 with open(sys.argv[1], 'r') as in_file:   # to automagically close the file
-  mrna = in_file.read().strip()           # when leaving the nested block
+  mrna = ''.join(in_file.read().split())  # when leaving the nested block
 
 code = {
 "UUU" : "F",  "CUU" : "L",  "AUU" : "I",  "GUU" : "V",
@@ -63,3 +63,14 @@ code = {
 "UGA" : None, "CGA" : "R",  "AGA" : "R",  "GGA" : "G",
 "UGG" : "W",  "CGG" : "R",  "AGG" : "R",  "GGG" : "G"
 }
+
+length = len(mrna)
+start  = mrna.upper().find("AUG")
+
+if start >= 0:
+  for i in range(start, length-2, 3):
+    aa = code.get(mrna[i:i+3].upper())
+    if aa == None: break
+    print(aa, end="")
+  print()
+else: print("No start codon found!")
