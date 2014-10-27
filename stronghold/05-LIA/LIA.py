@@ -25,7 +25,7 @@ Sample Output
 
 """
 import sys
-from math import factorial
+from math import factorial as fac
 
 with open(sys.argv[1], 'r') as in_file:   # to automagically close the file
   data = list(map(int,in_file.readline().split()))
@@ -53,6 +53,13 @@ g = N-1
 x = 0 # the initialization of probability for max 'g' Aa Bb organisms
 
 for i in range(0,g+1):
-  x += (factorial(n)/(factorial(i)*factorial(n-i)))*(p**i)*((1-p)**(n-i))
+  x += (fac(n)/fac(i)/fac(n-i))*(p**i)*((1-p)**(n-i))
 
 print(1-x)
+
+'''
+this works for the purposes of the exercise, however
+the precission is low, and even within the predetermined
+limits it is possible to get for example negative probabilities!
+for example for '7 80' I get: -4.440892098500626e-16
+'''
