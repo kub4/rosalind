@@ -32,7 +32,7 @@ MTPRLGLESLLE
 """
 import sys
 
-code = {
+dnacode = {
 "TTT" : "F",  "CTT" : "L",  "ATT" : "I",  "GTT" : "V",
 "TTC" : "F",  "CTC" : "L",  "ATC" : "I",  "GTC" : "V",
 "TTA" : "L",  "CTA" : "L",  "ATA" : "I",  "GTA" : "V",
@@ -51,49 +51,59 @@ code = {
 "TGG" : "W",  "CGG" : "R",  "AGG" : "R",  "GGG" : "G"
 }
 
-# the translation function, takes care of STOPs automatically
-def dna_translate(dna):
-  prot = []
-  stop = 0
-  for i in range(0, length-2, 3):
-    aa = code.get(dna[i:i+3])
-    print(aa)
-    if aa == None:
-      print("none aa")
-      return "".join(prot)
+"""
+function definitions:
+"""
+
+# from a _DNA_ string, return all ORFs as a list of protein strings
+#  * does not analyze the reverse complement
+#  * does not remove duplicate proteins
+#  * for each found START, translation is attempted by a helper function
+def find_orfs(dna):
+  i = 0
+  proteins = []
+  while i < (len(dna)-2):
+    start = dna.find("ATG", i)
+    if start < 0:
+      break
     else:
+      prot = dna_orf_translate(dna[start:])
+      if prot:
+        proteins.append(prot)
+    i = start + 1
+  return proteins
+
+# a _DNA_ translation function with special properties:
+#  * starts from the beginning of a DNA string
+#  * translates until STOP is encountered
+#  * if STOP is encountered, returns a protein string
+#  * of no STOP is encountered, no protein is returned!
+def dna_orf_translate(dna):
+  prot = []
+  for i in range(0, len(dna)-2, 3):
+    aa = dnacode.get(dna[i:i+3])
+    if aa:
       prot.append(aa)
+    else:
+      return "".join(prot)
   return None
 
+
+"""
+end of function definitions
+"""
+
+# open the file, extract the dna string
 with open(sys.argv[1], 'r') as in_file:
   dna = "".join(in_file.read().upper().split()[1:])
-
-# measure the dna strand
-length    = len(dna)
 
 # create the reverse complement
 basepairs = str.maketrans("ATCG","TAGC")
 rev_dna   = dna[::-1].translate(basepairs)
 
-# initialize the list of proteins
-proteins  = []
+# create a list of ORF proteins from both strands
+proteins = find_orfs(dna) + find_orfs(rev_dna)
 
-# go through both strands and find start codons
-# if found, send the relevant part of the strand
-# to translation (no need to search for STOPs now)
-for strand in [dna, rev_dna]:
-  i = 0
-  while i < (length-2):
-    print(i)
-    start = strand.find("ATG", i)
-    if start < 0:
-      print("BREAK")
-      break
-    else:
-      print(strand[start:], start, dna_translate(strand[start:])) #DEBUG FIXME
-      protein = dna_translate(strand[start:])
-      if protein:
-        proteins.append(protein)
-    i = start + 1
-
-print(proteins)
+# print the results, distinct candidates only
+for p in set(proteins):
+  print(p)
