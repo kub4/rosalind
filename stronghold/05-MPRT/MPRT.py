@@ -34,7 +34,7 @@ P20840_SAG1_YEAST
 79 109 135 248 306 348 364 402 485 501 614
 
 """
-import sys
+import re, sys #t :)
 from urllib.request import urlopen
 
 with open(sys.argv[1], 'r') as in_file:
@@ -42,8 +42,9 @@ with open(sys.argv[1], 'r') as in_file:
 
 # initialize the protein "database"
 protein_db = []
-# protein_db is a list of lists containing: pid, purl, pseq,
-# and a list of known motif locations within the protein
+# protein_db is a list of lists containing:
+# [0]: pid, [1]: purl, [2]: pseq, and [3]: a list of known motif locations
+# within the protein (well using a list of dicts would be probably nicer)
 
 for pid in pids:
   purl = "http://www.uniprot.org/uniprot/" + pid + ".fasta"
@@ -51,4 +52,20 @@ for pid in pids:
     pseq = "".join(fasta.read().decode().split("\n")[1:])
   protein_db.append([pid, purl, pseq, []])
 
-print(protein_db)
+regex = re.compile("N[^P][ST][^P]") # N-glycosylation motif
+
+for protein in protein_db:
+  # oh my, re does not support overlapping matches natively
+  pos = 0
+  while True:
+    motifmatch = regex.search(protein[2], pos)
+    if motifmatch is None:
+      break
+    protein[3].append(motifmatch.start()+1) #1-based numbering!
+    pos = motifmatch.start()+1
+
+# now print out the final results
+for protein in protein_db:
+  if protein[3]:
+    print(protein[0])
+    print(" ".join(map(str,protein[3])))
