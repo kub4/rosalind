@@ -33,22 +33,22 @@ MTPRLGLESLLE
 import sys
 
 dnacode = {
-"TTT" : "F",  "CTT" : "L",  "ATT" : "I",  "GTT" : "V",
-"TTC" : "F",  "CTC" : "L",  "ATC" : "I",  "GTC" : "V",
-"TTA" : "L",  "CTA" : "L",  "ATA" : "I",  "GTA" : "V",
-"TTG" : "L",  "CTG" : "L",  "ATG" : "M",  "GTG" : "V",
-"TCT" : "S",  "CCT" : "P",  "ACT" : "T",  "GCT" : "A",
-"TCC" : "S",  "CCC" : "P",  "ACC" : "T",  "GCC" : "A",
-"TCA" : "S",  "CCA" : "P",  "ACA" : "T",  "GCA" : "A",
-"TCG" : "S",  "CCG" : "P",  "ACG" : "T",  "GCG" : "A",
-"TAT" : "Y",  "CAT" : "H",  "AAT" : "N",  "GAT" : "D",
-"TAC" : "Y",  "CAC" : "H",  "AAC" : "N",  "GAC" : "D",
-"TAA" : None, "CAA" : "Q",  "AAA" : "K",  "GAA" : "E",
-"TAG" : None, "CAG" : "Q",  "AAG" : "K",  "GAG" : "E",
-"TGT" : "C",  "CGT" : "R",  "AGT" : "S",  "GGT" : "G",
-"TGC" : "C",  "CGC" : "R",  "AGC" : "S",  "GGC" : "G",
-"TGA" : None, "CGA" : "R",  "AGA" : "R",  "GGA" : "G",
-"TGG" : "W",  "CGG" : "R",  "AGG" : "R",  "GGG" : "G"
+"TTT" : "F",    "CTT" : "L",    "ATT" : "I",    "GTT" : "V",
+"TTC" : "F",    "CTC" : "L",    "ATC" : "I",    "GTC" : "V",
+"TTA" : "L",    "CTA" : "L",    "ATA" : "I",    "GTA" : "V",
+"TTG" : "L",    "CTG" : "L",    "ATG" : "M",    "GTG" : "V",
+"TCT" : "S",    "CCT" : "P",    "ACT" : "T",    "GCT" : "A",
+"TCC" : "S",    "CCC" : "P",    "ACC" : "T",    "GCC" : "A",
+"TCA" : "S",    "CCA" : "P",    "ACA" : "T",    "GCA" : "A",
+"TCG" : "S",    "CCG" : "P",    "ACG" : "T",    "GCG" : "A",
+"TAT" : "Y",    "CAT" : "H",    "AAT" : "N",    "GAT" : "D",
+"TAC" : "Y",    "CAC" : "H",    "AAC" : "N",    "GAC" : "D",
+"TAA" : "STOP", "CAA" : "Q",    "AAA" : "K",    "GAA" : "E",
+"TAG" : "STOP", "CAG" : "Q",    "AAG" : "K",    "GAG" : "E",
+"TGT" : "C",    "CGT" : "R",    "AGT" : "S",    "GGT" : "G",
+"TGC" : "C",    "CGC" : "R",    "AGC" : "S",    "GGC" : "G",
+"TGA" : "STOP", "CGA" : "R",    "AGA" : "R",    "GGA" : "G",
+"TGG" : "W",    "CGG" : "R",    "AGG" : "R",    "GGG" : "G"
 }
 
 """
@@ -58,7 +58,7 @@ function definitions:
 # from a _DNA_ string, return all ORFs as a list of protein strings
 #  * does not analyze the reverse complement
 #  * does not remove duplicate proteins
-#  * for each found START, translation is attempted by a helper function
+#  * for each found ATG, translation is attempted by a helper function
 def find_orfs(dna):
   i = 0
   proteins = []
@@ -77,15 +77,15 @@ def find_orfs(dna):
 #  * starts from the beginning of a DNA string
 #  * translates until STOP is encountered
 #  * if STOP is encountered, returns a protein string
-#  * of no STOP is encountered, no protein is returned!
+#  * if no STOP is encountered, None is returned
 def dna_orf_translate(dna):
   prot = []
   for i in range(0, len(dna)-2, 3):
     aa = dnacode.get(dna[i:i+3])
-    if aa:
-      prot.append(aa)
-    else:
+    if aa == "STOP":
       return "".join(prot)
+    else:
+      prot.append(aa)
   return None
 
 
