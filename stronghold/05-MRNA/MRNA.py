@@ -54,4 +54,6 @@ mrnas = 3
 for aa in protein:
     mrnas *= code_reversed[aa]
 
-print(mrnas)
+# python can deal with big numbers with no problems
+# modulo needed only for the output
+print(mrnas % 1000000)
