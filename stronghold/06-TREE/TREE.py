@@ -42,16 +42,31 @@ import sys
 with open(sys.argv[1], 'r') as in_file:
   data = in_file.read().strip().split("\n")
 
-n   = data.pop(0)
-adj = [i.split() for i in data]
+n   = int(data.pop(0))
+adj = [set(map(int,i.split())) for i in data]
 
 # now we need to group the connected nodes
 groups = [set(adj[0])] #initialize
 
-for a in adj:
-  for g in groups:
-  
+for i, a in enumerate(adj):
+  for j, g in enumerate(groups):
+    if a & g:
+      groups[j] = a|g
+      break
+  else:
+    groups.append(a)
 
-  
+# count the created groups
+g_count = len(groups)
 
-print(n, adj, groups)
+# count all grouped nodes
+g_nodes = sum(len(g) for g in groups)
+
+# now get the number of ungrouped nodes
+u_count = n - g_nodes
+
+# now all the groups, including the ungrouped nodes
+tot_grp = g_count + u_count
+
+# we need one less edge to connect all groups together
+print(tot_grp-1)
