@@ -45,6 +45,7 @@ with open(sys.argv[1], 'r') as in_file:
 n   = int(data.pop(0))
 adj = [set(map(int,i.split())) for i in data]
 
+'''
 # now we need to group the connected nodes
 groups = [set(adj[0])] #initialize
 
@@ -70,3 +71,9 @@ tot_grp = g_count + u_count
 
 # we need one less edge to connect all groups together
 print(tot_grp-1)
+'''
+
+# the above code works, but it is doing the work the hard way :)
+# if we know, that any tree has n-1 edges, no more, no less...
+
+print(n-1-len(adj))
