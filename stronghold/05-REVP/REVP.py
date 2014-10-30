@@ -45,8 +45,8 @@ rev_dna = dna[::-1].translate(basepairs)
 # measure the dna strand
 dl = len(dna)
 
-# search for the reverse palindormes
-for i in range(dl-0):
-  for pl in range(4,13,2): # reverse palindrom length must be even!
+# search for the reverse palindromes
+for pl in range(4,13,2): # reverse palindrom length must be even!
+  for i in range(dl-pl+1): # end just in time before the strand ends
     if dna[i:i+pl] == rev_dna[dl-i-pl:dl-i]:
       print(i+1, pl) # print 1-based numbering
