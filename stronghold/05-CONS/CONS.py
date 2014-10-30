@@ -69,6 +69,9 @@ length = len(sequences[0][1])
 for s in sequences:
   assert len(s[1]) == length, "All DNA strings must have the same lenght!"
 
+# define base order
+a = "ACGT"
+
 # create a profile matrix
 profile = []
 for i in range(length):
@@ -76,7 +79,7 @@ for i in range(length):
   for s in sequences:
     b.append(s[1][i])
   b = Counter(b)
-  counts = (b["A"], b["C"], b["G"], b["T"])
+  counts = (b[a[0]], b[a[1]], b[a[2]], b[a[3]])
   profile.append(counts) # appending count for the i-th position
 
 # get the consensus string
@@ -84,17 +87,14 @@ consensus = []
 for i in range(length):
   max_val = max(profile[i])
   max_idx = profile[i].index(max_val)
-  if max_idx == 0:
-    consensus.append("A")
-  if max_idx == 1:
-    consensus.append("C")
-  if max_idx == 2:
-    consensus.append("G")
-  if max_idx == 3:
-    consensus.append("T")
+  consensus.append(a[max_idx])
 consensus = "".join(consensus)
 
 # printing it all
 print(consensus)
-
-
+for i in range(4):
+  print(a[i], end=": ")
+  row = []
+  for j in range(length):
+    row.append(str(profile[j][i]))
+  print(" ".join(row))
