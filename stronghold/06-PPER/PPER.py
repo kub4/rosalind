@@ -29,7 +29,7 @@ Sample Output
 """
 
 import sys
-from math import factorial as fac
+import math
 
 # open the file and extract the numbers
 with open(sys.argv[1], 'r') as in_file:
@@ -40,14 +40,45 @@ k = int(data[1])
 
 assert (n > 0) and (k > 0) and (n >= k), "Bad input!"
 
-# now to compute the partial permutations
-# clearly, solution is:
+# now to compute the partial permutations, clearly, solution is:
 """
 combination (selecting k items from n items)
-*
+              *
 permutation (of the selected k items)
-"""
-combination = int(fac(n)/(fac(k)*fac(n-k)))
+
+              |
+              v
+
+combination = fac(n)/(fac(k)*fac(n-k))
+              *
 permutation = fac(k)
 
-print(combination * permutation % 1000000)
+              |
+              v
+
+        fac(n)/fac(n-k)
+"""
+# well, that is pretty neat formula and well usable in python 
+# which has good bignum support... but to implement the anti-overflow
+# modulo trick during the computation, we can go further...
+"""
+              |
+              v
+(n-k+1) * ... * (n-2) * (n-1) * n
+"""
+# so...
+
+pper = 1
+
+for i in range (n-k+1, n+1):
+  pper *= i
+  pper %= 1000000 # the modulo trick used during computation
+
+print(pper)
+
+"""
+as can be tested against the following function,
+ẗhe modulo trick makes the computing with large inputs
+(like: 800000 2000) much faster even in Python...
+"""
+#print((math.factorial(n)//math.factorial(n-k))%1000000)
