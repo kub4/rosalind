@@ -29,13 +29,23 @@ import math
 
 # open the file and extract the data
 with open(sys.argv[1], 'r') as in_file:
-  dna = in_file.readline().strip().upper()
+  dna = in_file.readline().upper().strip()
   gcc = [float(x) for x in in_file.readline().split()]
 
+# make some sanity checks
 for gc in gcc:
-  assert (gc <=1) and (gc >= 0), "Invalid GC content!"
+  assert 0 < gc < 1, "Need 1.0 > GC > 0.0 !"
+  # for gc==1 or gc==0, special handling would be needed because of the use
+  # of the logarithm function and we would need to output something like minus
+  # infinity for zero probabilities, only GC-only or AT-only strings with
+  # matching GC content of 1.0 or 0.0 would have probability equal to 1...
+  # ...but it does not make much biological sense and rosalind does not seem
+  # to use gc==1 or gc==0 in the inputs anyway...
+assert set(dna) <= set("ACGT"), "Not a valid DNA string!"
 
-
+# compute the probabilities normally, log them lately - this is bad for long
+# (==improbable) strings due to limited resolution of floats
+# uncomment this for comparision
 probs_lin = []
 for gc in gcc:
   prob = 1 # initialize string probability
@@ -46,9 +56,10 @@ for gc in gcc:
       prob *= (1-gc)/2
   probs_lin.append(prob)
 
-print(probs_lin)
-print([math.log(x,10) if x> 0 else None for x in probs_lin])
+print(" ".join(map(str,probs_lin)))
+print(" ".join(map(str,[math.log(x,10) if x > 0 else None for x in probs_lin])))
 
+# compute the probabilities as a sum of logarithms
 probs_log = []
 for gc in gcc:
   prob = 0 # initialize string probability
@@ -59,4 +70,4 @@ for gc in gcc:
       prob += math.log((1-gc)/2,10)
   probs_log.append(prob)
 
-print(probs_log)
+print(" ".join([".format(x) for x in probs_log]))
