@@ -49,7 +49,7 @@ assert set(dna) <= set("ACGT"), "Not a valid DNA string!"
 # uncomment this for comparision
 probs_lin = []
 for gc in gcc:
-  prob = 1 # initialize string probability
+  prob = 1 # initialize string probability (for multiplication)
   for nt in dna:
     if nt in ["G","C"]:
       prob *= gc/2
@@ -67,7 +67,7 @@ print(" ".join(map(str,[math.log(x,10) if x > 0 else None for x in probs_lin])))
 # even for long strings
 probs_log = []
 for gc in gcc:
-  prob = 0 # initialize string probability
+  prob = 0 # initialize string probability (for addition)
   for nt in dna:
     if nt in ["G","C"]:
       prob += math.log(gc/2,10)
