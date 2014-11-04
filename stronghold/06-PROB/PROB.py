@@ -43,6 +43,7 @@ for gc in gcc:
   # to use gc==1 or gc==0 in the inputs anyway...
 assert set(dna) <= set("ACGT"), "Not a valid DNA string!"
 
+"""
 # compute the probabilities normally, log them lately - this is bad for long
 # (==improbable) strings due to limited resolution of floats
 # uncomment this for comparision
@@ -58,8 +59,12 @@ for gc in gcc:
 
 print(" ".join(map(str,probs_lin)))
 print(" ".join(map(str,[math.log(x,10) if x > 0 else None for x in probs_lin])))
+# with a random string of 500 nucleotides, I got zero/None for all gc==0.25
+# and lower...
+"""
 
-# compute the probabilities as a sum of logarithms
+# compute the probabilities as a sum of logarithms, usable
+# even for long strings
 probs_log = []
 for gc in gcc:
   prob = 0 # initialize string probability
@@ -70,4 +75,4 @@ for gc in gcc:
       prob += math.log((1-gc)/2,10)
   probs_log.append(prob)
 
-print(" ".join([".format(x) for x in probs_log]))
+print(" ".join(map(str,probs_log)))
