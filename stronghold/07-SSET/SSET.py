@@ -23,12 +23,14 @@ Sample Output
 """
 
 import sys
-from math import factorial as fac
+#from math import factorial as fac
 
 # open a file and get n
 with open(sys.argv[1], 'r') as in_file:
   n = int(in_file.read().strip())
 
+# this works, but...
+"""
 # count the subsets
 subsets = 0
 for k in range(0, n+1):
@@ -36,3 +38,9 @@ for k in range(0, n+1):
 
 # in Python, we can safely modulo in the very end
 print(subsets % 1000000)
+"""
+
+# the mathematical truth is that the number
+# of subsets is equal to n!... and the pow
+# function in python supports modulo...
+print(pow(2,n,1000000))
