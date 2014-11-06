@@ -57,7 +57,6 @@ sequences = ["".join(s).upper() for s in sequences]
 jointable = []
 for i, s in enumerate(sequences):
   l = (len(s)+1)//2
-  print(len(s),l)
   for j, t in enumerate(sequences):
     if i != j:
       match = t.find(s[-l:])
@@ -72,7 +71,13 @@ assert len(start)==1, "This is guaranteed not to happen!"
 
 chromosome = ""
 fragment_to_add = list(start)[0]
-while fragment_to_add:
-  chromosome = sequences[fragment_to_add]
-  fragment_to_add = 1
-# check jointable
+while True:
+  chromosome += sequences[fragment_to_add]
+  x = [x for x in jointable if x[0]==fragment_to_add]
+  if x:
+    fragment_to_add = x[0][1]
+    chromosome = chromosome[:-x[0][2]]
+  else:
+    break
+
+print(chromosome)
