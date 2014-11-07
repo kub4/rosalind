@@ -26,6 +26,7 @@ Sample Output
 
 import sys
 
+"""
 def find_possible_pairs(rna):
   possible_pairs = []
   l = len(rna)
@@ -98,34 +99,34 @@ def remove_crosslinks(possible,known):
         break        
   print("crosslinks found ", len(crosslinks), crosslinks)
   return set(possible)-set(crosslinks)
-      
+"""      
      
       
 
 
-def remove_pairs(masterlist,remove):
-  unique = set(masterlist)-set(remove)
-  return unique  
 
-def test(interval):
-  a=len([a for a in interval if a == "A"])
-  c=len([c for c in interval if c == "C"])
-  g=len([g for g in interval if g == "G"])
-  u=len([u for u in interval if u == "U"])
-  if a==u and c==g:
+
+def test_interval(i):
+  """
+  Returns True, if the interval contains the same number of occurrences of
+  'A' as 'U' and the same number of occurrences of 'C' as 'G' and the perfect
+  matching is therefore possible. Returns False otherwise.
+  """
+  if (i.count("A")==i.count("U") and i.count("C")==i.count("G")):
     return True
   else:
     return False
   
-
-# open a file and get the sequence
+# open a file and get the sequence (uppercased, just in case)
 with open(sys.argv[1], 'r') as in_file:
   lines = in_file.read().upper().splitlines()
 rna = "".join(lines[1:])
 
-possible = set()
-known = set()
-print(len(rna))
+# check, whether the rna fulfills the perfect matching critera
+if test_interval(rna) == False:
+  print("This RNA is not suitable for perfect matching!")
+  print(0) # no perfect matchings are possible
+  quit()
 
 possible = find_possible_pairs(rna)
 for i in range(3):
