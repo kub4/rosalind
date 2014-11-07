@@ -63,6 +63,45 @@ def select_known_pairs(possible):
         known_pairs.append(p)
   return set(known_pairs)
                
+def make_stat(possible):
+  length = len(rna) #valid for the first round only!
+  lenarray = [0]*((length+2)//2)
+  for p in possible:
+    a, b = p
+    x=min(a,b)
+    y=max(a,b)
+    l = y-x-1
+    if l>length//2:
+      l = length-l
+    lenarray[l] +=1
+  print(lenarray)
+  
+def is_in(a, interval):
+  x = min(interval)
+  y = max(interval)
+  if a>x and a<y:
+    return True
+  else:
+    return False
+
+def remove_crosslinks(possible,known):
+  crosslinks = []
+  for p in possible:
+    a, b = p
+    for k in known:
+      c,d=k
+      if is_in(c,p) != is_in(d,p):
+        crosslinks.append(p)
+        break
+      if a==c or a==d or b==c or b==d:
+        crosslinks.append(p)
+        break        
+  print("crosslinks found ", len(crosslinks), crosslinks)
+  return set(possible)-set(crosslinks)
+      
+     
+      
+
 
 def remove_pairs(masterlist,remove):
   unique = set(masterlist)-set(remove)
@@ -86,13 +125,16 @@ rna = "".join(lines[1:])
 
 possible = set()
 known = set()
+print(len(rna))
 
 possible = find_possible_pairs(rna)
-for i in range(10):
+for i in range(3):
   known = known | select_known_pairs(possible)
   possible = remove_pairs(possible, known)
+  possible = remove_crosslinks(possible, known)
   #print(possible)
   #print("possible", len(possible))
-  #print(known)
+  print(sorted(known))
   print("known", len(known))
+make_stat(possible)
 
