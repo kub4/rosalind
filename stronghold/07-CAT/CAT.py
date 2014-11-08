@@ -26,116 +26,65 @@ Sample Output
 
 import sys
 
-"""
-def find_possible_pairs(rna):
-  possible_pairs = []
+def count_noncrossing_perfect_matchings(rna):
+  """
+  Computes recursively the number of possible noncrossing perfect matchings
+  in the RNA molecule. Assumes a valid RNA fulfilling the perfect matching
+  criteria (should be tested before calling this function).
+  """
+  # if only two bases remain, and because we know the perfect matching
+  # criteria are still honored, there is exactly one way to match
+  # if the string is empty, we return 1 as a neutral element for
+  # multiplication with the other subinterval
   l = len(rna)
-  for base in [("A","U"),("C","G")]:
-    for i, nt in enumerate(rna):
-      if nt == base[0]:
-        for j, nu in enumerate(rna):
-          if nu == base[1]:
-            x = min(i,j)
-            y = max(i,j)
-            frg1 = rna[x+1:y]
-            frg2 = rna[y+1:]+rna[:x]
-            if test(frg1) and test(frg2):
-              possible_pairs.append((i,j))
-  return possible_pairs
+  if l <= 2:
+    return 1
 
-def select_known_pairs(possible):
-  # count how many times occur each rna position in pairs
-  counts = [0]*len(rna)
-  for p in possible:
-    counts[p[0]] += 1
-    counts[p[1]] += 1
-  print(counts)
-  # select those occuring only once (we hope for them!)
-  magic_pos = []
-  for i, val in enumerate(counts):
-    if val == 1:
-      magic_pos.append(i)
-  #print(magic_pos)
-  # find the known pairs
-  known_pairs = []
-  for m in magic_pos:
-    for p in possible:
-      if m == p[0] or m == p[1]:
-        known_pairs.append(p)
-  return set(known_pairs)
-               
-def make_stat(possible):
-  length = len(rna) #valid for the first round only!
-  lenarray = [0]*((length+2)//2)
-  for p in possible:
-    a, b = p
-    x=min(a,b)
-    y=max(a,b)
-    l = y-x-1
-    if l>length//2:
-      l = length-l
-    lenarray[l] +=1
-  print(lenarray)
-  
-def is_in(a, interval):
-  x = min(interval)
-  y = max(interval)
-  if a>x and a<y:
-    return True
-  else:
-    return False
+  # create a list of all positions that, when bonded with the base at the
+  # first position (rna[0]), fulfill the noncrossing perfect matching criteria
+  # (i.e. new intervals contain the same number of 'A' as 'U' and 'C' as 'G') 
+  #
+  # because we always start at the first position:
+  # * we do not need to care about the circular shape of the graph
+  # * the same bondings are not counted repeatedly deeper in the recursion
+  #   (because the first position is not included in any new subintervals)
+  #
+  # because we always start with a valid interval, only one of the new
+  # subintervals needs to be tested
+  valid_bondings = [p for p in range(1,l,2) if rna[p]==pairing[rna[0]] and
+                   test_interval(rna[1:p])]
 
-def remove_crosslinks(possible,known):
-  crosslinks = []
-  for p in possible:
-    a, b = p
-    for k in known:
-      c,d=k
-      if is_in(c,p) != is_in(d,p):
-        crosslinks.append(p)
-        break
-      if a==c or a==d or b==c or b==d:
-        crosslinks.append(p)
-        break        
-  print("crosslinks found ", len(crosslinks), crosslinks)
-  return set(possible)-set(crosslinks)
-"""      
-     
-      
-
-
-
-
-def test_interval(i):
+  # now count the perfect matchings
+  noncrossing_perfect_matchings = 0
+  for p in valid_bondings:
+    matches1 = count_noncrossing_perfect_matchings(rna[1:p])
+    matches2 = count_noncrossing_perfect_matchings(rna[p+1:])
+    noncrossing_perfect_matchings += matches1 * matches2
+  return noncrossing_perfect_matchings
+ 
+def test_interval(rna):
   """
   Returns True, if the interval contains the same number of occurrences of
   'A' as 'U' and the same number of occurrences of 'C' as 'G' and the perfect
   matching is therefore possible. Returns False otherwise.
   """
-  if (i.count("A")==i.count("U") and i.count("C")==i.count("G")):
+  if (rna.count("A")==rna.count("U") and rna.count("C")==rna.count("G")):
     return True
   else:
     return False
   
-# open a file and get the sequence (uppercased, just in case)
+# open a fasta file and get the sequence (uppercased, just in case)
 with open(sys.argv[1], 'r') as in_file:
   lines = in_file.read().upper().splitlines()
 rna = "".join(lines[1:])
 
-# check, whether the rna fulfills the perfect matching critera
-if test_interval(rna) == False:
-  print("This RNA is not suitable for perfect matching!")
+# check, whether the rna fulfills the perfect matching criteria
+if not test_interval(rna):
   print(0) # no perfect matchings are possible
-  quit()
+  sys.exit() # quit correctly, with exit code 0 (success)
 
-possible = find_possible_pairs(rna)
-for i in range(3):
-  known = known | select_known_pairs(possible)
-  possible = remove_pairs(possible, known)
-  possible = remove_crosslinks(possible, known)
-  #print(possible)
-  #print("possible", len(possible))
-  print(sorted(known))
-  print("known", len(known))
-make_stat(possible)
+# define base pairing rules
+pairing = {"A":"U", "U":"A", "C":"G", "G":"C"}
 
+# compute and print the result
+print(count_noncrossing_perfect_matchings(rna))
