@@ -100,5 +100,5 @@ pairing = {"A":"U", "U":"A", "C":"G", "G":"C"}
 # initialize a dictionary for memoization
 rnadict = {}
 
-# compute and print the result
-print(count_noncrossing_perfect_matchings(rna))
+# compute and print the result, modulo 1000000
+print(count_noncrossing_perfect_matchings(rna) % 1000000)
