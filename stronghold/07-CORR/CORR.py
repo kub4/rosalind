@@ -58,11 +58,12 @@ from collections import defaultdict
 
 def reverse_complement(dna):
   """
-  Returns the reverse complement DNA string.
-  Requires uppercase DNA string.
+  Returns the reverse complement DNA string. Requires an uppercase DNA string.
+  Requires 'revdict' dictionary for memoization.
   """
-  basepairs = str.maketrans("ACGT","TGCA")
-  return dna[::-1].translate(basepairs)
+  if dna not in revdict:
+    revdict[dna] = dna[::-1].translate(str.maketrans("ACGT","TGCA"))
+  return revdict[dna]
 
 def ham1_compare(dna1,dna2):
   """
@@ -94,6 +95,9 @@ sequences = ["".join(s) for s in sequences]
 # reverse complements as synonyms, storing always the version that is
 # the first in lexicographical order
 uniques = defaultdict(int)
+
+# creates a dictionary for reverse complement memoization
+revdict = {}
 
 # create lists to hold all bad reads and their corrected versions
 bad_reads = []
