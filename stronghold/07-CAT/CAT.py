@@ -57,8 +57,10 @@ def count_noncrossing_perfect_matchings(rna):
   #
   # because we always start with a valid interval, only one of the new
   # subintervals needs to be tested
-  valid_bondings = [p for p in range(1,l,2) if rna[p]==pairing[rna[0]] and
-                   test_interval(rna[1:p])]
+  valid_bondings = []
+  for p in range(1,l,2):
+    if rna[p]==pairing[rna[0]] and test_interval(rna[1:p]):
+      valid_bondings.append(p)
 
   # now count the perfect matchings - we multiply numbers for two matching
   # subintervals (as they can be freely combined) and sum numbers for
