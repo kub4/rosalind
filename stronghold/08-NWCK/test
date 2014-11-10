@@ -1,0 +1,10 @@
+((a,b),(c,d))
+a b --> should be 2
+((a,b),(c,d))
+a c --> should be 4
+(((a,c),b),((d,e),(f,g)))
+f d --> should be 4
+(((a,c),b),((d,e),(f,g)))
+g a --> should be 6
+(((a,c),b),((d,e),(f,g)))
+d b --> should be 5
