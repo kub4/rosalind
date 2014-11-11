@@ -10,3 +10,5 @@ g a --> should be 6
 d b --> should be 5
 (((a,c),b),((d,e),(f,g)))
 a z --> should be None
+(((a,c),b),((d,e),(f,g)))
+b b --> should be 0
