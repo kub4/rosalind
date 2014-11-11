@@ -8,3 +8,5 @@ f d --> should be 4
 g a --> should be 6
 (((a,c),b),((d,e),(f,g)))
 d b --> should be 5
+(((a,c),b),((d,e),(f,g)))
+a z --> should be None

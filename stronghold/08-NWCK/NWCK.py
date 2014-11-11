@@ -27,75 +27,57 @@ Sample Output
 
 """
 
-import sys, ast
+import sys
 
 def distance_in_tree(tree,a,b):
   a_parents = []
   b_parents = []
-  a_loc = tree.find(a)
-  b_loc = tree.find(b)
-  if a_loc > 0 and tree[a_loc-1] == ")":
-    a_parents.append(a_loc-1)
-  else:
-    a_parents.append(-100)
-  if b_loc > 0 and tree[b_loc-1] == ")":
-    b_parents.append(b_loc-1)
-  else:
-    b_parents.append(-100)
-  openings = 0
-  for i in range(a_loc, len(tree)):
-    if tree[i] == "(":
-      openings += 1
-    if tree[i] == ")":
-      if openings > 0:
-        openings -= 1
-        #print("xa",i, openings)
-      else:
-        #print(openings)
-        a_parents.append(i)
-  openings  = 0
-  for i in range(b_loc, len(tree)):
-    if tree[i] == "(":
-      openings += 1
-    if tree[i] == ")":
-      if openings > 0:
-        openings -= 1
-        #print("xb",i, openings)
-      else:
-        #print(openings)
-        b_parents.append(i)
-  #print(a_parents)
-  #print(b_parents)
+  for node, parents in ([a, a_parents], [b, b_parents]):
+    loc = tree.find(node)
+    if loc > 0 and tree[loc-1] == ")":
+      parents.append(loc-1)
+    else:
+      parents.append(-1)
+    openings = 0
+    for i in range(loc, len(tree)):
+      if tree[i] == "(":
+        openings += 1
+      if tree[i] == ")":
+        if openings > 0:
+          openings -= 1
+        else:
+          parents.append(i)
+  # now compare both parents lists and find the most recent common ancestor
+  # return the sum of distances from nodes to the most recent common ancestor
   for i in range(len(a_parents)):
     if a_parents[i] >= 0:
-       if a_parents[i] in b_parents:
-         #print(a_parents, b_parents)
-         #print(i,b_parents.index(a_parents[i]))
-         return i+b_parents.index(a_parents[i])
-  return 10000000
+      if a_parents[i] in b_parents:
+        return i+b_parents.index(a_parents[i])
+  return None # should not happen, probably some node missing in the tree
 
 
-# open a file and parse the data
+# open the file
 with open(sys.argv[1], 'r') as in_file:
   lines = in_file.readlines()
 
+# parse the data
 trees = []
 node_pairs = []
 for line in lines:
   line = line.strip()
   if line:
-    if "(" in line:
+    if "(" in line: #we assume each tree contains parentheses
       trees.append(line)
-    else:
+    else: # but no node name contains parentheses
       node_pairs.append(line.split())
 
 # sanity check
 assert len(trees)==len(node_pairs)
 
-# compute and print the distances
+# compute the distances
 distances = []
 for tree, pair in zip(trees, node_pairs):
-  #print(tree, pair)
   distances.append(distance_in_tree(tree, pair[0], pair[1]))
 
+# print the results
 print(" ".join(map(str,distances)))
