@@ -1,0 +1,135 @@
+Rosalind.info TOP100 users 2014-11-11
+http://rosalind.info/users/leafmoon/
+http://rosalind.info/users/mmammel/
+http://rosalind.info/users/natbelyaeva/
+http://rosalind.info/users/cyurys/
+http://rosalind.info/users/smallfry/
+http://rosalind.info/users/sk27/
+http://rosalind.info/users/rodmar/
+http://rosalind.info/users/root/
+http://rosalind.info/users/waltervannini/
+http://rosalind.info/users/aspotashev/
+http://rosalind.info/users/abowes/
+http://rosalind.info/users/E.Choroba/
+http://rosalind.info/users/Bychenko/
+http://rosalind.info/users/ChopinPlover/
+http://rosalind.info/users/AndreyPopov/
+http://rosalind.info/users/gringer/
+http://rosalind.info/users/zhouxiaofan1983/
+http://rosalind.info/users/kostyamyagkov/
+http://rosalind.info/users/inamori/
+http://rosalind.info/users/v.bonifaci/
+http://rosalind.info/users/archbayleef/
+http://rosalind.info/users/mtadd/
+http://rosalind.info/users/yondchang/
+http://rosalind.info/users/bred/
+http://rosalind.info/users/alexaandru/
+http://rosalind.info/users/IIMOG/
+http://rosalind.info/users/netoctone/
+http://rosalind.info/users/thocevar/
+http://rosalind.info/users/hallvabo/
+http://rosalind.info/users/edzienis/
+http://rosalind.info/users/Crn/
+http://rosalind.info/users/Peter_de_Rivaz/
+http://rosalind.info/users/dfyz/
+http://rosalind.info/users/bigfighter/
+http://rosalind.info/users/sicilicide/
+http://rosalind.info/users/Fernando_USJT/
+http://rosalind.info/users/mionolski/
+http://rosalind.info/users/teju85/
+http://rosalind.info/users/saddam.raj/
+http://rosalind.info/users/moto/
+http://rosalind.info/users/pradeep/
+http://rosalind.info/users/Davo36/
+http://rosalind.info/users/igor.lorents/
+http://rosalind.info/users/david.powell/
+http://rosalind.info/users/chiendarrendor/
+http://rosalind.info/users/oren.livne/
+http://rosalind.info/users/russH/
+http://rosalind.info/users/ruhshan.ahmed/
+http://rosalind.info/users/clawsoon/
+http://rosalind.info/users/tungwaiyip/
+http://rosalind.info/users/kdas/
+http://rosalind.info/users/abeliangrape/
+http://rosalind.info/users/sefakilic/
+http://rosalind.info/users/chenxingwei/
+http://rosalind.info/users/lionbark/
+http://rosalind.info/users/Sonia/
+http://rosalind.info/users/Doxxer/
+http://rosalind.info/users/martynov.oleg.mipt/
+http://rosalind.info/users/kuzux/
+http://rosalind.info/users/ccotiuga/
+http://rosalind.info/users/sguenwald/
+http://rosalind.info/users/sarasouju/
+http://rosalind.info/users/Denis.Torre/
+http://rosalind.info/users/mugenen/
+http://rosalind.info/users/kml/
+http://rosalind.info/users/RomanAndreev/
+http://rosalind.info/users/yuan/
+http://rosalind.info/users/alexis/
+http://rosalind.info/users/RobertOlechowski/
+http://rosalind.info/users/lelimat/
+http://rosalind.info/users/RoiB/
+http://rosalind.info/users/Yarik/
+http://rosalind.info/users/avdeevp/
+http://rosalind.info/users/emran01/
+http://rosalind.info/users/abss.pakso@gmail.com/
+http://rosalind.info/users/Goodhope/
+http://rosalind.info/users/songcx004/
+http://rosalind.info/users/romanenkoa/
+http://rosalind.info/users/Nat_Lovin/
+http://rosalind.info/users/kevinoconnor29/
+http://rosalind.info/users/peter/
+http://rosalind.info/users/laser13/
+http://rosalind.info/users/Cin/
+http://rosalind.info/users/oleglyamin/
+http://rosalind.info/users/Myke/
+http://rosalind.info/users/Tsukasa/
+http://rosalind.info/users/A.Person/
+http://rosalind.info/users/DieterDS/
+http://rosalind.info/users/dvolgyes/
+http://rosalind.info/users/naagin/
+http://rosalind.info/users/kobak/
+http://rosalind.info/users/wojdyr/
+http://rosalind.info/users/ytyoun/
+http://rosalind.info/users/kyberias/
+http://rosalind.info/users/erick/
+http://rosalind.info/users/fsinapsi/
+http://rosalind.info/users/recervictory/
+http://rosalind.info/users/tri_ipst/
+http://rosalind.info/users/artpaul/
+http://rosalind.info/users/it4kp/
+
+LANGUAGES:
+Python 44
+None 16
+C++ 11
+Ruby 6
+C# 5
+Perl 3
+R 3
+MATLAB 2
+Java 2
+Haskell 2
+Go 2
+Scala 1
+PHP 1
+C 1
+Common Lisp 1
+
+LANGUAGES WEIGHTED:
+Python 2286
+None 518
+C++ 469
+Ruby 452
+Perl 248
+C# 216
+R 199
+MATLAB 133
+Go 121
+Java 115
+Haskell 99
+Common Lisp 86
+C 71
+Scala 19
+PHP 18
