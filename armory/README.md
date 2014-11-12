@@ -1,4 +1,4 @@
-Rosalind.info Bioinformatics Armory####
+####Rosalind.info Bioinformatics Armory####
 
 * written in Python, using Biopython and other tools
 * numbers before the problem IDs designate the vertical position in the problem tree
