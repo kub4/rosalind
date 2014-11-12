@@ -29,7 +29,7 @@ with open(sys.argv[1], 'r') as in_file:
   dna = Seq(''.join(in_file.read().upper().split()), generic_dna)
 
 # define the order of bases in the output and create a counter list
-baseorder  = "ACGT"
+baseorder = "ACGT"
 basecount = []
 
 # count the bases
