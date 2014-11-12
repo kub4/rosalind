@@ -1,4 +1,4 @@
 ####Utilities####
 
-* various little tools created when solving Rosalind problems:
-** acidmaker.py
+* `acidmaker.py` - a simple tool for creatin random acid sequences
+* `rosalind-top100.py` - programming languages stats from Rosalind TOP100 users
