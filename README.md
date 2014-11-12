@@ -1,6 +1,6 @@
-###Rosalind.info Solutions###
+###Rosalind Solutions###
 
 * written in Python3
 * not necessarily optimal or even correct
 * most probably never complete
-* please, do not use for cheating!
+* do not use for cheating
