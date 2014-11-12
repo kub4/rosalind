@@ -1,6 +1,7 @@
 ####Rosalind.info Bioinformatics Stronghold####
 
-* numbers before the problem IDs designate the vertical position in the problem tree
-* 01 is the top of the tree == the simplest problem
+* implemented in Python3 using the standard library only
+* numbers in directory names designate the vertical position in the problem tree
+* the lesser the number, the closer to the simplest problem
 * problems on the same level have the same number
-* do not use for cheating!
+* please, do not use for cheating
