@@ -1,6 +1,6 @@
-####Rosalind.info Bioinformatics Stronghold####
+####Bioinformatics Stronghold####
 
-* implemented in Python3 using the standard library only
+* solutions implemented in Python3 using the standard library only
 * numbers in directory names designate the vertical position in the problem tree
 * the lesser the number, the closer to the simplest problem
 * problems on the same level have the same number
