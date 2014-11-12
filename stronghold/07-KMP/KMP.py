@@ -31,10 +31,6 @@ Sample Output
 
 import sys
 
-def prefix_generator(dna):
-  for l in range(len(dna)):
-    yield dna[:l+1]  
-
 # open the file and parse the sequence
 with open(sys.argv[1], 'r') as in_file:
   lines = in_file.readlines()
