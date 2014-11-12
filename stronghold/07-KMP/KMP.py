@@ -43,11 +43,19 @@ dna = "".join(dna)
 
 # create the failure array
 failure_array = [0]*len(dna)
+# create a copy so we do not write to the array we iterate over
+temp_array = list(failure_array)
 
+# here comes the magick
 length = len(dna)
 for prefixlen in range(1,length):
+  if prefixlen-1 not in failure_array:
+    break # abort early if further elongation is hopeless
   for nt in range (prefixlen,length):
+    # we only need to check the result for the previous nt and one more nt
     if failure_array[nt-1] == prefixlen-1 and dna[nt] == dna[prefixlen-1]:
-      failure_array[nt] = prefixlen
-     
+      temp_array[nt] = prefixlen # do not overwrite values while iterating
+  failure_array = list(temp_array)
+
+# print the results
 print(" ".join(map(str,failure_array)))
