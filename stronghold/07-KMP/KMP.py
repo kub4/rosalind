@@ -37,21 +37,28 @@ with open(sys.argv[1], 'r') as in_file:
 dna = [x.strip().upper() for x in lines[1:]]
 dna = "".join(dna)
 
-# create the failure array
-failure_array = [0]*len(dna)
-# create a copy so we do not write to the array we iterate over
-temp_array = list(failure_array)
+# measure the dna
+length = len(dna)
+
+# create the working array
+working_array = [[] for i in range(length)]
 
 # here comes the magick
 length = len(dna)
-for prefixlen in range(1,length):
-  if prefixlen-1 not in failure_array:
-    break # abort early if further elongation is hopeless
-  for nt in range (prefixlen,length):
-    # we only need to check the result for the previous nt and one more nt
-    if failure_array[nt-1] == prefixlen-1 and dna[nt] == dna[prefixlen-1]:
-      temp_array[nt] = prefixlen # do not overwrite values while iterating
-  failure_array = list(temp_array)
+for nt in range(1,length):
+  if dna[nt] == dna[0]:
+    working_array[nt].append(1)
+  for x in working_array[nt-1]:
+    if dna[nt] == dna[x]:
+      working_array[nt].append(x+1)
+
+# create the failure array
+failure_array = []
+for f in working_array:
+  if f:
+    failure_array.append(f[-1])
+  else:
+    failure_array.append(0)
 
 # print the results
 print(" ".join(map(str,failure_array)))
