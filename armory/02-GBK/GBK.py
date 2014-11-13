@@ -42,4 +42,22 @@ query = "{}[ORGN] AND {}:{}[PDAT]".format(genus, date_beg, date_end)
 # create the database handle
 handle = Entrez.esearch(db="nucleotide", term=query)
 
-print(handle)
+# the following code would, from the handle, read a xml-formatted
+# string, that would need to be parsed (note also that the handle
+# is closed after use, so you cannot open it once and then compare
+# two ways of reading the handle without reopening it - therefore
+# simple uncommenting of the following line would result in
+# "OSError: Can't parse a closed handle" comming from the second
+# read attempt)
+
+###record = handle.read()
+
+# however the following code parses the xml string automagically,
+# record then contains <class 'Bio.Entrez.Parser.DictionaryElement'>,
+# which can be inspected using 'print(record') and contains, among
+# other items "'Count': '6'"...
+
+record = Entrez.read(handle)
+
+# so we print out the value for 'Count'
+print(record["Count"])
