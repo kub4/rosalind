@@ -54,10 +54,10 @@ handle = Entrez.esearch(db="nucleotide", term=query)
 
 # however the following code parses the xml string automagically,
 # record then contains <class 'Bio.Entrez.Parser.DictionaryElement'>,
-# which can be inspected using 'print(record') and contains, among
-# other items "'Count': '6'"...
+# which can be inspected using 'print(record)' and contains, among
+# other items, "'Count': '6'"...
 
 record = Entrez.read(handle)
 
-# so we print out the value for 'Count'
+# so we simply print out the value for 'Count'
 print(record["Count"])
