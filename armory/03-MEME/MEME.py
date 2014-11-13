@@ -61,4 +61,5 @@ memeout = check_output(command, shell=True).decode().splitlines()
 for i, line in enumerate(memeout):
   if "regular expression" in line:
     regexline = i + 2
+    break
 print(memeout[regexline])
