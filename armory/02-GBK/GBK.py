@@ -47,7 +47,7 @@ handle = Entrez.esearch(db="nucleotide", term=query)
 # is closed after use, so you cannot open it once and then compare
 # two ways of reading the handle without reopening it - therefore
 # simple uncommenting of the following line would result in
-# "OSError: Can't parse a closed handle" comming from the second
+# "OSError: Can't parse a closed handle" coming from the second
 # read attempt)
 
 ###record = handle.read()
