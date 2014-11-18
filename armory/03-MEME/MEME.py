@@ -40,12 +40,11 @@ import sys
 from subprocess import check_output
 
 """
-Because the online web version of MEME is too slow (failed
-two attempts because of the timeout), I have downloaded,
-compiled and installed a local copy of the MEME package.
-This Python script is only a glue that uses the meme command
-and then extracts the wanted regular expression from the
-output file.
+Because the online web version of MEME is too slow (failed two attempts
+because of the timeout), I have downloaded, compiled and installed
+a local copy of the MEME package. This Python script is only a helper
+that uses the meme command and then extracts the wanted regular
+expression from its output.
 """ 
 
 # the meme command we want to use followed by the rosalind dataset
@@ -62,4 +61,5 @@ memeout = check_output(command, shell=True).decode().splitlines()
 for i, line in enumerate(memeout):
   if "regular expression" in line:
     regexline = i + 2
+    break
 print(memeout[regexline])
