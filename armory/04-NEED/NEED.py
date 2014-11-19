@@ -27,8 +27,8 @@ Sample Output
 """
 
 import sys, re, os
-from Bio import Entrez
 from subprocess import check_output
+from Bio import Entrez, SeqIO
 
 """
 Solved using 'needle' from Debian 'emboss' package (6.6 in Jessie).
@@ -45,18 +45,16 @@ with open(sys.argv[1], 'r') as in_file:
 # specify your email address to stop warnings
 Entrez.email = "kub4@mailinator.com"
 
-# create a list for temporary fasta filenames
-filenames = []
+# define the fasta filenames to use
+filenames = ["a.fasta", "b.fasta"]
 
-# individually for each genbank id, create a database handle 
-# (see 03-FRMT for Entrez.efetch parameters) and save the fasta
-# file ('<genbank_id>.fasta') in the local directory
-for gid in genbank_ids:
-  handle = Entrez.efetch(db="nuccore", id=gid, rettype="fasta")
-  fname = gid + ".fasta"
-  filenames.append(fname)
-  with open(fname, 'w') as out_file:
-    out_file.write(handle.read())
+# create the database handle (see 03-FRMT for Entrez.efetch parameters)
+handle = Entrez.efetch(db="nuccore", id=genbank_ids, rettype="fasta")
+
+# parse using SeqIO and write both sequences to the local directory
+for record, filename in zip(SeqIO.parse(handle, "fasta"), filenames):
+  with open(filename, 'w') as out_file:
+    SeqIO.write(record, out_file, "fasta")
 
 # create a list for construction of the 'needle' command
 command = []
@@ -92,5 +90,7 @@ for line in needleout:
     break
 
 # remove the temporary sequence files
-for fname in filenames:
-  os.remove(fname)
+for filename in filenames:
+  os.remove(filename)
+
+# amen, kallisti
