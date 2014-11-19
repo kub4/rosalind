@@ -30,10 +30,14 @@ from Bio import SwissProt
 with open(sys.argv[1], 'r') as in_file:
   pid = in_file.read().strip()
 
-# you can give several IDs separated by commas
+# create a handle...
+# note that the comment "you can give several IDs separated by commas"
+# in the rosalind's programming shorcut instructions is misleading, tried
+# it during SWAT (where two protein ids are given) and it does not work...
+# and after a short look into the biopython's source, it cannot work...
 handle = ExPASy.get_sprot_raw(pid)
 
-# use SwissProt.parse for multiple proteins
+# read it
 record = SwissProt.read(handle)
 
 """
