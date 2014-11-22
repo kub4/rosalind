@@ -33,16 +33,22 @@ Sample Output
 
 import sys
 from Bio.Seq import translate
+from Bio.Seq import CodonTable
 
 # extract and purify biopolymers from the input file
 with open(sys.argv[1], "r") as in_file:
   dna            = in_file.readline().strip()
   master_protein = in_file.readline().strip()
 
+"""
 # manually taken list from CodonTable.py (Biopython source),
 # the list at http://www.bioinformatics.org/JaMBW/2/3/TranslationTables.html
 # is incomplete (Last update of the Genetic Codes: Sep 26, 1996)
 valid_tables = [1,2,3,4,5,6,9,10,11,12,13,14,15,16,21,22,23]
+"""
+# ok, it is better to get the valid tables list programatically
+# print(CodonTable.unambiguous_dna_by_id)
+valid_tables = [k for k,v in CodonTable.unambiguous_dna_by_id.items()]
 
 # a list of the codes possibly used for translating our dna to our protein
 # (yet empty)
