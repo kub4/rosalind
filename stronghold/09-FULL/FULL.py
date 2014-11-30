@@ -48,53 +48,36 @@ KEKEP
 
 import sys, random
 
-# the monoisotopic mass table
+# the inverted monoisotopic mass table, because I and L
+# have the same mass, I should be treated as I or L if
+# it is important
 monoisotopic_masses = {
-"A" : 71.03711,
-"C" : 103.00919,
-"D" : 115.02694,
-"E" : 129.04259,
-"F" : 147.06841,
-"G" : 57.02146,
-"H" : 137.05891,
-"I" : 113.08406,
-"K" : 128.09496,
-"L" : 113.08406,
-"M" : 131.04049,
-"N" : 114.04293,
-"P" : 97.05276,
-"Q" : 128.05858,
-"R" : 156.10111,
-"S" : 87.03203,
-"T" : 101.04768,
-"V" : 99.06841,
-"W" : 186.07931,
-"Y" : 163.06333 }
+  57.02146 : "G",
+  71.03711 : "A",
+  87.03203 : "S",
+  97.05276 : "P",
+  99.06841 : "V",
+ 101.04768 : "T",
+ 103.00919 : "C",
+ 113.08406 : "I", # or L
+ 114.04293 : "N",
+ 115.02694 : "D",
+ 128.05858 : "Q",
+ 128.09496 : "K",
+ 129.04259 : "E",
+ 131.04049 : "M",
+ 137.05891 : "H",
+ 147.06841 : "F",
+ 156.10111 : "R",
+ 163.06333 : "Y",
+ 186.07931 : "W"      }
 
-# define the function for analyzing prefix spectra
-def prefix_spectrum_to_protein(spectrum):
-  print(spectrum)
-  """
-  From a given, complete, sorted and unpolluted prefix spectrum containing
-  zero to all aminoacids of the wanted protein, returns the protein sequence.
-  Uses random choice where more than one aminoacid is possible (I/L).
-  Requires the monoisotopic_masses dictionary (aminoacids as keys).
-  """
-  protein = []
-  for i in range(1, len(spectrum)):
-    w = spectrum[i]-spectrum[i-1]
-    valid_aas = []
-    print(w)
-    # compare rounded numbers to get the matches
-    for aa, mass in monoisotopic_masses.items():
-      if round(mass,2) == round(w,2):
-        valid_aas.append(aa)
-    #for more fun, if more choices, choose randomly
-    if valid_aas:
-      protein.append(random.choice(valid_aas))
-    else:
-      protein.append("X")
-  return(protein)
+def almostequal(number1, number2):
+  delta = 0.01
+  if abs(number1 - number2) < delta:
+    return True
+  else:
+    return False
 
 # create a list to hold all the masses
 masses = []
@@ -113,24 +96,48 @@ assert n==int(n), "input error, bad length of the masses list"
 n = int(n)
 
 # separate the mass of the whole s protein from the masses list
-smass = masses.pop(0)
+total_mass = masses[0]
 
 # sort the remaining mass list
-masses = sorted(masses)
+fragment_masses = sorted(masses[1:])
 
-# we have redundant information, so we can split the list in two
-prefix_spectrum = masses[:n+1]
-suffix_spectrum = list(reversed(masses[n+1:]))
+# select the shortest mass as the bare prefix (may be it is a suffix,
+# but we cannot distinguish it
+bare_prefix = fragment_masses.pop(0)
 
-# now build the t subprotein from the both spectra
-# but if using a suffix spectrum, it needs to be reversed
-t1 = prefix_spectrum_to_protein(prefix_spectrum)
-t2 = list(reversed(prefix_spectrum_to_protein(suffix_spectrum)))
+#print(fragment_masses)
+for ii,x in enumerate(fragment_masses):
+  #print(",?")
+  if almostequal(total_mass-bare_prefix, x):
+    #print(total_mass-bare_prefix, x)
+    fragment_masses[ii] = False
+    #rint("pl\n\npppppp!!!!!!!!!!")
+    break
 
-# t1 and t2 should be identical, of course
-#assert t1==t2, "mismatch of proteins inferred from prefix and suffix spectra"
+protein = []
+curr_mass = bare_prefix
+#print(fragment_masses)
 
-# print the result
-print(t1)
-print(t2)
-print("".join(t1))
+while True:
+  for i, m in enumerate(fragment_masses):
+    #print("outerforbegins")
+    #print(fragment_masses)
+    #print(curr_mass)
+    for k, v in monoisotopic_masses.items():
+      if almostequal((m - curr_mass),k):
+        #print(m-curr_mass, k, "equal?")
+        protein.append(v)
+        #print(protein)
+        curr_mass = m
+        fragment_masses[i] = False
+        for y,x in enumerate(fragment_masses):
+          if almostequal(total_mass-m, x):
+            fragment_masses[y] = False
+            break
+        print(fragment_masses)
+        break
+  break
+#print(fragment_masses)
+assert n == len(protein)
+print("".join(protein))
+
