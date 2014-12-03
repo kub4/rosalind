@@ -22,6 +22,7 @@ Sample Output
 """
 
 import sys
+from math import factorial as fac
 
 # open the file
 with open(sys.argv[1], 'r') as in_file:
@@ -33,4 +34,12 @@ so the unoptimized formula for combinations is:
 C(n,k) = ---------
          k!*(n-k)!
 """
-print(n,m)
+# the variable to hold the sum of combinations
+comb_sum = 0
+
+# now compute all the combinations, naively
+for k in range(m, n+1):
+  comb = fac(n)//(fac(k)*fac(n-k))
+  comb_sum += comb
+
+print(comb_sum % 1000000)
