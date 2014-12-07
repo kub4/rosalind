@@ -4,6 +4,14 @@
 Insertion Sort
 ==============
 
+Insertion sort is a simple sorting algorithm that builds the final sorted array
+one item at a time. It is much less efficient on large lists than more advanced
+algorithms such as “Quick Sort”, “Heap Sort”, or “Merge Sort”. However,
+insertion sort provides several advantages: simple implementation, efficient
+for (quite) small data sets, O(1) extra space. When humans manually sort
+something (for example, a deck of playing cards), most use a method that
+is similar to insertion sort.
+
 Although it is one of the elementary sorting algorithms with O(n^2) worst-case
 time, insertion sort is the algorithm of choice either when the data is nearly
 sorted (because it is adaptive) or when the problem size is small (because it
