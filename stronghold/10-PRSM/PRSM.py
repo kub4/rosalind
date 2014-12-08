@@ -67,7 +67,7 @@ rnd = 3
 def weight(p):
   w = 0
   for aminoacid in p:
-    w += int(round(1000*monoisotopic_masses[aminoacid])+0.1)
+    w += int(round(100000*monoisotopic_masses[aminoacid])+0.1)
   return w
 
 def complete_spectrum(p):
@@ -87,17 +87,17 @@ with open(sys.argv[1], 'r') as in_file:
 # parse the data
 n        = int(lines[0].strip())
 peptides = [p.strip() for p in lines[1:n+1]]
-weights  = [int(round(float(w)*1000)+0.1) for w in lines[n+1:]]
+weights  = [int(round(float(w)*100000)+0.1) for w in lines[n+1:]]
 
+
+max_mult = []
 for p in peptides:
   difference = []
   for w in weights:
     for v in complete_spectrum(p):
       difference.append(w-v)
   c=Counter(difference)
-  print(p)
-  print()
-  #print(sorted(difference))
-  print()
-  print(c.most_common(1))
-  print()
+  max_mult.append(c.most_common(1)[0][1])
+
+print(max(max_mult))
+print(peptides[max_mult.index(max(max_mult))])
