@@ -1,4 +1,4 @@
-Rosalind.info TOP100 users 2015-03-22
+Rosalind.info TOP100 users 2015-04-24
 http://rosalind.info/users/leafmoon/
 http://rosalind.info/users/mmammel/
 http://rosalind.info/users/natbelyaeva/
@@ -7,38 +7,38 @@ http://rosalind.info/users/smallfry/
 http://rosalind.info/users/sk27/
 http://rosalind.info/users/AndreyPopov/
 http://rosalind.info/users/tungwaiyip/
+http://rosalind.info/users/cowboysmall/
 http://rosalind.info/users/rodmar/
 http://rosalind.info/users/root/
 http://rosalind.info/users/laurent.mazare/
-http://rosalind.info/users/waltervannini/
 http://rosalind.info/users/Goodhope/
+http://rosalind.info/users/waltervannini/
 http://rosalind.info/users/aspotashev/
 http://rosalind.info/users/Bychenko/
 http://rosalind.info/users/abowes/
 http://rosalind.info/users/E.Choroba/
+http://rosalind.info/users/kostyamyagkov/
 http://rosalind.info/users/ChopinPlover/
+http://rosalind.info/users/erikita/
 http://rosalind.info/users/back2mars/
 http://rosalind.info/users/gringer/
 http://rosalind.info/users/zhouxiaofan1983/
 http://rosalind.info/users/naoya_t/
-http://rosalind.info/users/kostyamyagkov/
 http://rosalind.info/users/Davo36/
 http://rosalind.info/users/inamori/
 http://rosalind.info/users/netoctone/
-http://rosalind.info/users/v.bonifaci/
-http://rosalind.info/users/archbayleef/
 http://rosalind.info/users/IIMOG/
+http://rosalind.info/users/v.bonifaci/
+http://rosalind.info/users/lionbark/
+http://rosalind.info/users/archbayleef/
+http://rosalind.info/users/niemamoshiri/
 http://rosalind.info/users/mtadd/
 http://rosalind.info/users/teju85/
-http://rosalind.info/users/niemamoshiri/
 http://rosalind.info/users/yondchang/
 http://rosalind.info/users/alexaandru/
-http://rosalind.info/users/erikita/
 http://rosalind.info/users/bred/
-http://rosalind.info/users/cowboysmall/
 http://rosalind.info/users/thocevar/
 http://rosalind.info/users/hallvabo/
-http://rosalind.info/users/lionbark/
 http://rosalind.info/users/edzienis/
 http://rosalind.info/users/Crn/
 http://rosalind.info/users/Peter_de_Rivaz/
@@ -59,17 +59,23 @@ http://rosalind.info/users/david.powell/
 http://rosalind.info/users/chiendarrendor/
 http://rosalind.info/users/oren.livne/
 http://rosalind.info/users/russH/
+http://rosalind.info/users/svengato/
 http://rosalind.info/users/kdas/
 http://rosalind.info/users/abeliangrape/
 http://rosalind.info/users/sefakilic/
 http://rosalind.info/users/chenxingwei/
 http://rosalind.info/users/Moff/
+http://rosalind.info/users/febos/
 http://rosalind.info/users/Doxxer/
 http://rosalind.info/users/peter/
+http://rosalind.info/users/kyli/
+http://rosalind.info/users/tarjei/
+http://rosalind.info/users/christopher.barber/
 http://rosalind.info/users/martynov.oleg.mipt/
 http://rosalind.info/users/kuzux/
 http://rosalind.info/users/lelimat/
 http://rosalind.info/users/Goldbio/
+http://rosalind.info/users/mdb/
 http://rosalind.info/users/ccotiuga/
 http://rosalind.info/users/BerlindaV/
 http://rosalind.info/users/sguenwald/
@@ -88,20 +94,14 @@ http://rosalind.info/users/alexis/
 http://rosalind.info/users/RobertOlechowski/
 http://rosalind.info/users/RoiB/
 http://rosalind.info/users/avdeevp/
-http://rosalind.info/users/mdb/
 http://rosalind.info/users/onl1ner.as/
 http://rosalind.info/users/emran01/
 http://rosalind.info/users/abss.pakso@gmail.com/
 http://rosalind.info/users/songcx004/
 http://rosalind.info/users/maximumsteve/
-http://rosalind.info/users/romanenkoa/
-http://rosalind.info/users/JoelR/
-http://rosalind.info/users/febos/
-http://rosalind.info/users/kevinoconnor29/
-http://rosalind.info/users/laser13/
 
 LANGUAGES:
-Python 49
+Python 50
 None 16
 C++ 10
 Ruby 5
@@ -111,25 +111,23 @@ Java 3
 MATLAB 2
 Go 2
 Haskell 2
-C# 1
 C 1
-Scala 1
-F# 1
 Common Lisp 1
+F# 1
+C# 1
 
 LANGUAGES WEIGHTED:
-Python 2569
-C++ 455
-None 454
-Ruby 386
-Perl 236
-R 170
-Java 163
-Go 121
-MATLAB 118
+Python 2574
+None 481
+C++ 420
+Ruby 387
+Perl 232
+Java 188
+R 158
+Go 118
+MATLAB 112
 Common Lisp 94
-C# 86
-Haskell 76
-F# 61
+C# 85
+Haskell 71
+F# 70
 C 60
-Scala 1
